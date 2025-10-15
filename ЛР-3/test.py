@@ -1,12 +1,12 @@
 import unittest
-from task_1 import gen_bin_tree #импорт функции gen_bin_tree из файла task_1
+from task_1 import gen_bin_tree 
 
-class test(unittest.TestCase): #создание набора проверок
+class test(unittest.TestCase):
     
-    def test_basic(self): #тест с конкретными значениями
+    def test_basic(self):
         """Базовый тест"""
-        tree = gen_bin_tree(height=2, root=1) #вызов функции, создающей дерево (создание дерева с корнем 1 и высотой 2)
-        self.assertEqual(tree['value'], 1) #проверка равенства
+        tree = gen_bin_tree(height=2, root=1) 
+        self.assertEqual(tree['value'], 1)
         self.assertEqual(tree['left']['value'], 2)
         self.assertEqual(tree['right']['value'], 3)
     
@@ -16,8 +16,8 @@ class test(unittest.TestCase): #создание набора проверок
                            left_func=lambda x: x**2, 
                            right_func=lambda x: 2 + x**2)
         self.assertEqual(tree['value'], 11)
-        self.assertEqual(tree['left']['value'], 121)  # 11²
-        self.assertEqual(tree['right']['value'], 123) # 2 + 11²
+        self.assertEqual(tree['left']['value'], 121) 
+        self.assertEqual(tree['right']['value'], 123) 
     
     def test_height_1(self):
         """Тест с высотой 1"""
@@ -30,5 +30,5 @@ class test(unittest.TestCase): #создание набора проверок
         """Тест с высотой 0"""
         self.assertIsNone(gen_bin_tree(height=0))
 
-if __name__ == '__main__': #запуск тестов
+if __name__ == '__main__':
     unittest.main()

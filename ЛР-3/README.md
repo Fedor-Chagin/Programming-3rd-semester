@@ -37,38 +37,6 @@ def gen_bin_tree(height=3, root=1, left_func=lambda x: x ** 2, right_func=lambda
         'right': gen_bin_tree(height-1, right_func(root), left_func, right_func)
     }
 ```
-
-2. Результат выполненной работы:  
-```json
-{
-  "value": 11,
-  "left": {
-    "value": 121,
-    "left": {
-      "value": 14641,
-      "left": null,
-      "right": null
-    },
-    "right": {
-      "value": 14643,
-      "left": null,
-      "right": null
-    }
-  },
-  "right": {
-    "value": 123,
-    "left": {
-      "value": 15129,
-      "left": null,
-      "right": null
-    },
-    "right": {
-      "value": 15131,
-      "left": null,
-      "right": null
-    }
-  }
-}
 ```
 ---
 ### Тест

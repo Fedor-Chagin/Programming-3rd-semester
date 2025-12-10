@@ -1,6 +1,4 @@
-import json
-
-def gen_bin_tree(height=3, root=1, left_func=None, right_func=None):
+def gen_bin_tree(height=3, root=1, left_func=lambda x: x ** 2, right_func=lambda x: 2 + x ** 2):
     """
     Рекурсивно генерирует бинарное дерево в виде словаря.
     
@@ -23,12 +21,6 @@ def gen_bin_tree(height=3, root=1, left_func=None, right_func=None):
     
     if height == 0:
         return {'value': root, 'left': None, 'right': None}
-    
-    # Формулы по умолчанию для варианта 11
-    if left_func is None:
-        left_func = lambda x: x ** 2
-    if right_func is None:
-        right_func = lambda x: 2 + x ** 2
     
     return {
         'value': root,

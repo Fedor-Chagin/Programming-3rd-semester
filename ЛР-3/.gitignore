@@ -1,8 +1,23 @@
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
+
+# PyTest
 .pytest_cache/
+
+# Virtual environments
 .venv/
 env/
 venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
 .DS_Store
+
+# Logs
+*.log

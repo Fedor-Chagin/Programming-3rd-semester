@@ -6,28 +6,28 @@ class EventHandler:
     def handle(self, event):
         pass
 
-# 2. Конкретные стратегии (обработчики событий). Т.е. мы создаём класс MouseButtonDownHandler, который наследует EventHandler
-class MouseButtonDownHandler(EventHandler): # Обработчик клика
-    def handle(self, event): # В методе handle мы получаем объект event
-        print(f"Клик мыши в ({event.pos[0]}, {event.pos[1]})") # event.pos это координаты мыши по x и y
-
-class MouseWheelHandler(EventHandler): # Обработчик прокрутки колёсика мыши
+# 2. Конкретные стратегии
+class MouseButtonDownHandler(EventHandler):
     def handle(self, event):
-        print(f"Колёсико: {event.y}") # event.y это направление прокрутки колёсика
+        print(f"Клик мыши в ({event.pos[0]}, {event.pos[1]})")
 
-class MouseMotionHandler(EventHandler): # Обработчик координат курсора
+class MouseWheelHandler(EventHandler):
+    def handle(self, event):
+        print(f"Колёсико: {event.y}")
+
+class MouseMotionHandler(EventHandler):
     def handle(self, event):
         print(f"Движение мыши в ({event.pos[0]}, {event.pos[1]})")
 
-class MouseButtonUpHandler(EventHandler): # Обработчик отпускания мыши
+class MouseButtonUpHandler(EventHandler):
     def handle(self, event):
         print(f"Отпускание кнопки в ({event.pos[0]}, {event.pos[1]})")
 
-# 3. Контекст (диспетчер событий)
-class EventDispatcher: 
-    def __init__(self): # __init__ вызывается при создании объекта
-        # Таблица стратегий
-        self.handlers = {} # пустой словарь
+# 3. Контекст
+class EventDispatcher:
+    def __init__(self):
+        # Таблица стратегий (как массив указателей в C)
+        self.handlers = {}
     
     def register(self, event_type, handler):
         self.handlers[event_type] = handler

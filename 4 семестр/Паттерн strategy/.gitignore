@@ -1,0 +1,44 @@
+# Исполняемые файлы
+/program
+/m
+osmc
+
+# Файлы сборки
+*.o
+*.out
+*.exe
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Резервные копии
+*~
+*.bak
+
+# Папка сборки CMake
+build/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+*.cmake
+
+# Плагины (если не хотите их коммитить)
+plugins/watchfaces/*/*.so
+plugins/watchfaces/*/*.o
+
+# Логи
+*.log
+*.profraw
+
+# Временные файлы
+*.tmp
+*.temp

@@ -24,9 +24,9 @@ class MouseButtonUpHandler(EventHandler):
         print(f"Отпускание кнопки в ({event.pos[0]}, {event.pos[1]})")
 
 # 3. Контекст
-class EventDispatcher:
-    def __init__(self):
-        # Таблица стратегий (как массив указателей в C)
+class EventDispatcher: 
+    def __init__(self): 
+        # Таблица стратегий
         self.handlers = {}
     
     def register(self, event_type, handler):
@@ -45,7 +45,6 @@ def main():
     # Создаём диспетчер
     dispatcher = EventDispatcher()
     
-    # Регистрируем стратегии (как заполнение массива в C)
     dispatcher.register(pygame.MOUSEBUTTONDOWN, MouseButtonDownHandler())
     dispatcher.register(pygame.MOUSEBUTTONUP, MouseButtonUpHandler())
     dispatcher.register(pygame.MOUSEMOTION, MouseMotionHandler())

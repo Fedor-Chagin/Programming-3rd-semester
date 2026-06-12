@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>👤 {{ title }}</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/users">Пользователи</a></li>
+                    <li><a href="/currencies">Курсы валют</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="user-info">
+                <h2>{{ user.name }}</h2>
+                <p><strong>ID:</strong> {{ user.id }}</p>
+            </div>
+            
+            <div class="subscriptions">
+                <h3>📌 Мои подписки на валюты</h3>
+                {% if subscriptions %}
+                    {% for currency in subscriptions %}
+                    <div class="currency-card">
+                        <div class="currency-header">
+                            <h4>{{ currency.char_code }} - {{ currency.name }}</h4>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chart_{{ currency.char_code }}" width="800" height="300"></canvas>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="no-subscriptions">Нет активных подписок</p>
+                {% endif %}
+            </div>
+
+            <div class="manage-subscriptions">
+                <h3>➕ Управление подписками</h3>
+                
+                <form method="POST" action="/subscribe">
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                    <label for="currency_id">Добавить подписку:</label>
+                    <select name="currency_id" id="currency_id" required>
+                        {% for currency in all_currencies %}
+                        <option value="{{ currency.id }}">{{ currency.char_code }} - {{ currency.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Подписаться</button>
+                </form>
+                
+                {% if subscriptions %}
+                <form method="POST" action="/unsubscribe" style="margin-top: 20px;">
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                    <label for="currency_id_remove">Удалить подписку:</label>
+                    <select name="currency_id" id="currency_id_remove" required>
+                        {% for currency in subscriptions %}
+                        <option value="{{ currency.id }}">{{ currency.char_code }} - {{ currency.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" style="background: #dc3545;">Отписаться</button>
+                </form>
+                {% endif %}
+            </div>
+            
+        </main>
+        
+        <footer>
+            <a href="/users">← Назад к списку пользователей</a>
+        </footer>
+    </div>
+
+    <script>
+        // Создаём графики для каждой подписанной валюты
+        {% for currency in subscriptions %}
+        (function() {
+            const canvas = document.getElementById('chart_{{ currency.char_code }}');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const history = {{ currency.history | tojson }};
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: history.map(item => item.date),
+                    datasets: [{
+                        label: 'Курс {{ currency.char_code }} к RUB',
+                        data: history.map(item => item.rate),
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        fill: true,
+                        pointBackgroundColor: '#764ba2',
+                        pointBorderColor: '#fff',
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Курс: ${context.raw} ₽`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Курс (₽)',
+                                font: { weight: 'bold' }
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Дата (за последние 3 месяца)',
+                                font: { weight: 'bold' }
+                            },
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45
+                            }
+                        }
+                    }
+                }
+            });
+        })();
+        {% endfor %}
+    </script>
+</body>
+</html>

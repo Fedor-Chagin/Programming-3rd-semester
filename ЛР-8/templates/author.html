@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Об авторе</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 Об авторе</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/users">Пользователи</a></li>
+                    <li><a href="/currencies">Курсы валют</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="author-card">
+                <h2>{{ author.name }}</h2>
+                <p>Группа: {{ author.group }}</p>
+            </div>
+        </main>
+        
+        <footer>
+            <a href="/">Вернуться на главную</a>
+        </footer>
+    </div>
+</body>
+</html>

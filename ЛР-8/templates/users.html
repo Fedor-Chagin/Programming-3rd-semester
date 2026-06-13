@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>👥 {{ title }}</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/users">Пользователи</a></li>
+                    <li><a href="/currencies">Курсы валют</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="users-grid">
+                {% for user in users %}
+                <div class="user-card">
+                    <h3>{{ user.name }}</h3>
+                    <p>ID: {{ user.id }}</p>
+                    <a href="/user?id={{ user.id }}" class="btn">Подробнее →</a>
+                </div>
+                {% else %}
+                <p>Пользователи не найдены</p>
+                {% endfor %}
+            </div>
+        </main>
+        
+        <footer>
+            <a href="/">Вернуться на главную</a>
+        </footer>
+    </div>
+</body>
+</html>

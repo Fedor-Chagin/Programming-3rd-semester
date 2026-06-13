@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }} - Главная</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ app_name }} v{{ app_version }}</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/users">Пользователи</a></li>
+                    <li><a href="/currencies">Курсы валют</a></li>
+                    <li><a href="/author">Об авторе</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="hero">
+                <h2>Мониторинг курсов валют (ЛР-8)</h2>
+                <p>Актуальные курсы с сайта ЦБ РФ и управление подписками</p>
+            </div>
+            
+            <div class="features">
+                <a href="/currencies" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
+                    <h3>📊 Реальные курсы</h3>
+                    <p>Данные обновляются в реальном времени с сайта ЦБ РФ</p>
+                </a>
+                
+                <a href="/users" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
+                    <h3>👥 Пользователи</h3>
+                    <p>Управляйте подписками на валюты</p>
+                </a>
+                
+                <a href="/user?id=1" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
+                    <h3>📈 Мои подписки</h3>
+                    <p>Отслеживайте динамику курсов валют</p>
+                </a>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Автор: {{ author.name }}, группа {{ author.group }}</p>
+        </footer>
+    </div>
+</body>
+</html>

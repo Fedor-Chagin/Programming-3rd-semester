@@ -63,6 +63,13 @@ myremotemodule.myfoo()
 
 ![alt text](<Снимок экрана 2026-10-01 в 23.37.57.png>)
 
+```bash
+ubuntu@ubuntu:/var/www/html/study/Python_programming$ sudo grep "Python_programming" /var/log/apache2/access.log
+188.170.79.40 - - [20/Nov/2026:16:25:53 +0300] "GET /study/Python_programming HTTP/1.1" 301 631 "-" "python-requests/2.34.2"
+188.170.79.40 - - [20/Nov/2026:16:25:53 +0300] "GET /study/Python_programming/ HTTP/1.1" 200 729 "-" "python-requests/2.34.2"
+188.170.79.40 - - [20/Nov/2026:16:25:53 +0300] "GET /study/Python_programming/myremotemodule.py HTTP/1.1" 200 456 "-" "python-requests/2.34.2"
+ubuntu@ubuntu:/var/www/html/study/Python_programming$
+```
 ##### запуск
 
 source venv/bin/activate

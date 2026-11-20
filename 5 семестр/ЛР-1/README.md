@@ -63,6 +63,8 @@ myremotemodule.myfoo()
 
 ![alt text](<Снимок экрана 2026-10-01 в 23.37.57.png>)
 
+##### запуск
 
-
+source venv/bin/activate
+python activation_script.py
 ---
